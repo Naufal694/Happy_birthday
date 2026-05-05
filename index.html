@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Day 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <audio id="bgMusic" loop>
+        <source src="Audio/Happy-Birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="musicToggle" class="music-btn" onclick="toggleMusic()">🔇</button>
+
+    <!-- Animasi Background -->
+    <ul class="circles">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <!-- HALAMAN 1: Intro -->
+    <div id="page1" class="page active">
+        <div class="icon-bounce">💌</div>
+        <h1>Hai Selamat<br>Ulang Tahun yaa</h1>
+        <p class="subtitle">Sebelum Di Buka Isi Dulu Namanya Ya...</p>
+        <input type="text" id="namapenerima" placeholder="Nama kamu..." autocomplete="off">
+        <button onclick="mulaiPerjalanan()">Buka Surat ✨</button>
+    </div>
+
+    <!-- HALAMAN 2: Mesin Tik Full -->
+    <div id="page2" class="page">
+        <h1 id="greetingTitle" class="big-title">Halo!</h1>
+        <p id="typewriterText" class="typing-area"></p>
+        <button id="btnLanjut" style="display: none; margin-top: 20px;" onclick="pindahHalaman('page3')">ayo di lanjut... ➡️</button>
+    </div>
+
+<!-- HALAMAN 3: 3 Bunga Rapi & Clean (Tanpa Ranting) -->
+    <div id="page3" class="page">
+        <h1 style="position: relative; z-index: 30;">Bunga untuk kamu 🌸</h1>
+        <p style="position: relative; z-index: 30;">Mekar sempurna, seperti kamu yang sempurna.</p>
+        
+        <!-- Wadah 3 Bunga Rapi di Tengah -->
+        <div class="flower-cluster">
+            
+            <!-- BUNGA 1: Kiri Atas (Mekar Paling Akhir) -->
+            <div class="a-flower f-left" style="--delay: 1.5s;">
+                <div class="a-petal"></div><div class="a-petal"></div><div class="a-petal"></div><div class="a-petal"></div><div class="a-petal"></div>
+                <div class="a-stamens"><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-core"></div></div>
+            </div>
+
+            <!-- BUNGA 2: Kanan Atas (Mekar Kedua) -->
+            <div class="a-flower f-right" style="--delay: 1s;">
+                <div class="a-petal"></div><div class="a-petal"></div><div class="a-petal"></div><div class="a-petal"></div><div class="a-petal"></div>
+                <div class="a-stamens"><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-core"></div></div>
+            </div>
+
+            <!-- BUNGA 3: Utama di Tengah Depan (Mekar Pertama) -->
+            <div class="a-flower f-center" style="--delay: 0.5s;">
+                <div class="a-petal"></div><div class="a-petal"></div><div class="a-petal"></div><div class="a-petal"></div><div class="a-petal"></div>
+                <div class="a-stamens"><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-stamen"></div><div class="a-core"></div></div>
+            </div>
+
+        </div>
+        
+        <div class="button-group" style="position: relative; z-index: 30;">
+            <button class="btn-back" onclick="pindahHalaman('page2')">⬅️ Kembali</button>
+            <button onclick="pindahHalaman('page4')">Sekarang main game dulu ya! 🎮</button>
+        </div>
+    </div>
+
+    <!-- HALAMAN 4: MINI GAME -->
+    <div id="page4" class="page">
+        <h1 class="medium-title">Mini Game 🧩</h1>
+        <p>Temukan semua foto kamu yang cantik dan lucu</p>
+        
+        <div class="game-board" id="gameBoard">
+            <!-- Kartu di-generate oleh JS -->
+        </div>
+       <div class="button-group" style="margin-top: 30px;">
+            <button class="btn-back" onclick="pindahHalaman('page3')">⬅️ Kembali</button>
+        </div> 
+    </div>
+
+   <!-- HALAMAN 5: Video -->
+    <div id="page5" class="page">
+        <h1 class="medium-title">Vidio kamu yang lucu lucu 🎥</h1>
+        <p>Sebuah video lucu buat kamu buat. (Jangan lupa di-play ya!)</p>
+        <div class="video-wrapper">
+            <video id="memoryVideo" controls>
+                <source src="vidio/vidio1.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="button-group">
+            <button class="btn-back" onclick="pindahHalaman('page4')">⬅️ Kembali</button>
+            <button onclick="pindahHalaman('page6')">Lanjut ➡️</button> 
+        </div>
+    </div>
+
+   <!-- HALAMAN 6: GALERI SLIDER POLAROID -->
+    <div id="page6" class="page">
+        <h1 class="medium-title">foto foto orang cantik 📸</h1>
+        <p>Geser ke samping buat liat kenangan! 🫣</p>
+        
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                <!-- Foto 1 -->
+                <div class="slide-card">
+                    <img src="image/foto2.png" alt="Kenangan 1">
+                    <p class="slide-text">kamu inget gak si ini pap kamu pertama kali setelah kita jadian senengnya akuu🥰</p>
+                </div>
+                <!-- Foto 2 -->
+                <div class="slide-card">
+                    <img src="image/foto1.png" alt="Kenangan 2">
+                    <p class="slide-text">dan ini adalah make up kamu yang terlucu karna di sini kamu imut banget, tau sii kamu mah setiap hari imut terus🥹</p>
+                </div>
+                <!-- Foto 3 -->
+                <div class="slide-card">
+                    <img src="image/foto3.png" alt="Kenangan 3">
+                    <p class="slide-text">ini foto banyak banget yang bilang kamu mirip ade aku dan pas aku liat bener mirip banget sama ola🤩</p>
+                </div>
+                <!-- Foto 4 -->
+                <div class="slide-card">
+                    <img src="image/foto5.png" alt="Kenangan 4">
+                    <p class="slide-text">wehh ada kakak pramuka, kalo bukan karna eskul ini mungkin kita gak akan pernah ketemu sampe sekarang🫣</p>
+                </div>
+                <!-- Foto 5 -->
+                <div class="slide-card">
+                    <img src="image/foto4.png" alt="Kenangan 5">
+                    <p class="slide-text">makasih yaa udah hadir di hidup aku, aku seneng dan bahagia punya wanita seperti kamu lucu cantik dan juga penyayang🤍</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-back" onclick="pindahHalaman('page5')">⬅️ Kembali</button>
+            <button onclick="fireConfetti()" class="btn-celebrate">🎉 Rayakan!</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,409 @@
+:root {
+    --primary-pink: #fb6f92;
+    --dark-pink: #c9184a;
+    --text-color: #590d22;
+    --glass-bg: rgba(255, 255, 255, 0.35);
+    --glass-border: rgba(255, 255, 255, 0.6);
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #ffdde1, #ee9ca7, #ffc3a0, #ffafbd);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: var(--text-color);
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Latar Belakang Animasi Gelembung Full Screen */
+.circles {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0; pointer-events: none;
+}
+.circles li {
+    position: absolute; display: block; list-style: none; width: 20px; height: 20px;
+    background: rgba(255, 255, 255, 0.4); animation: animate 25s linear infinite; bottom: -150px;
+    border-radius: 50%; backdrop-filter: blur(5px);
+
+    /* ... (kodingan lebar, tinggi, dan animasi kamu yang lama biarin aja) ... */
+    
+    /* 💖 TAMBAHKAN KODE DI BAWAH INI 💖 */
+    border-radius: 0 !important; /* Menghilangkan lengkungan kotak lama */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'/%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+.circles li:nth-child(1) { left: 25%; width: 120px; height: 120px; animation-delay: 0s; }
+.circles li:nth-child(2) { left: 10%; width: 40px; height: 40px; animation-delay: 2s; animation-duration: 12s; }
+.circles li:nth-child(3) { left: 70%; width: 50px; height: 50px; animation-delay: 4s; }
+.circles li:nth-child(4) { left: 40%; width: 90px; height: 90px; animation-delay: 0s; animation-duration: 18s; }
+.circles li:nth-child(5) { left: 65%; width: 35px; height: 35px; animation-delay: 0s; }
+.circles li:nth-child(6) { left: 80%; width: 150px; height: 150px; animation-delay: 3s; }
+.circles li:nth-child(7) { left: 35%; width: 200px; height: 200px; animation-delay: 7s; }
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(0deg); /* Rotate-nya dinolin aja biar lurus */
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+/* --- LAYOUT HALAMAN FULL SCREEN --- */
+.page {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0; visibility: hidden;
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10; padding: 20px; text-align: center;
+}
+
+.page.active { 
+    opacity: 1; visibility: visible; 
+    transform: scale(1) translateY(0); 
+}
+
+/* Tipografi */
+h1 {
+    font-family: 'Dancing Script', cursive; font-size: 4.5rem; color: var(--dark-pink);
+    margin-bottom: 10px; text-shadow: 3px 3px 6px rgba(255,255,255,0.7);
+    line-height: 1.2;
+}
+
+.big-title { font-size: 5rem; }
+.medium-title { font-size: 4rem; }
+
+p { 
+    font-size: 1.2rem; margin-bottom: 30px; line-height: 1.8; max-width: 600px; 
+    text-shadow: 1px 1px 3px rgba(255,255,255,0.5);
+}
+
+.subtitle { font-weight: 600; }
+.typing-area { min-height: 120px; font-size: 1.5rem; }
+
+/* Icon Animasi */
+.icon-bounce {
+    font-size: 6rem; margin-bottom: -10px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce { 
+    0%, 100% { transform: translateY(0); } 
+    50% { transform: translateY(-15px); } 
+}
+
+/* Elemen Interaktif (Input & Tombol) */
+input[type="text"] {
+    width: 100%; max-width: 400px; padding: 18px 25px; margin: 15px 0 30px 0;
+    border: 2px solid var(--glass-border); border-radius: 50px;
+    background: var(--glass-bg); backdrop-filter: blur(10px);
+    font-family: 'Poppins', sans-serif; font-size: 1.2rem; color: var(--text-color);
+    outline: none; transition: all 0.3s ease; text-align: center;
+    box-shadow: 0 8px 32px rgba(251, 111, 146, 0.15);
+}
+
+input[type="text"]:focus {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: var(--primary-pink);
+    transform: scale(1.05);
+}
+
+button {
+    background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink)); color: white;
+    border: none; padding: 15px 40px; font-size: 1.2rem; font-family: 'Poppins', sans-serif;
+    font-weight: 600; border-radius: 50px; cursor: pointer; transition: all 0.4s ease;
+    box-shadow: 0 10px 25px rgba(201, 24, 74, 0.4); text-transform: uppercase; letter-spacing: 1px;
+}
+
+button:hover { 
+    transform: translateY(-5px) scale(1.05); 
+    box-shadow: 0 15px 35px rgba(201, 24, 74, 0.6); 
+}
+
+.btn-celebrate { margin-top: 10px; }
+
+/* Efek Kursor Mesin Tik */
+.cursor { display: inline-block; width: 4px; height: 1.2rem; background-color: var(--dark-pink); animation: blink 1s infinite; vertical-align: middle; margin-left: 5px; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ================================================= */
+/* KOMPOSISI 3 BUNGA RAPI (TANPA RANTING)            */
+/* ================================================= */
+.flower-cluster {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 10px auto 30px auto;
+    z-index: 20;
+    /* Efek melayang perlahan dan stabil */
+    animation: floatCluster 4s ease-in-out infinite;
+}
+
+@keyframes floatCluster {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* Wadah Posisi Bunga (Disebar dalam formasi segitiga) */
+.a-flower { position: absolute; width: 10px; height: 10px; }
+
+/* Bunga Utama (Tengah Bawah, Paling Besar) */
+.f-center { top: 180px; left: 150px; transform: scale(1.15); z-index: 15; } 
+/* Bunga Kiri (Kiri Atas, Agak Kecil) */
+.f-left { top: 100px; left: 80px; transform: scale(0.85) rotate(-25deg); z-index: 10; } 
+/* Bunga Kanan (Kanan Atas, Sedang) */
+.f-right { top: 110px; left: 220px; transform: scale(0.9) rotate(20deg); z-index: 10; } 
+
+/* Kelopak Bunga (Sama seperti sebelumnya, tapi tanpa ranting) */
+.a-petal {
+    position: absolute;
+    width: 70px; height: 95px;
+    background: radial-gradient(ellipse at bottom, #800f2f 0%, #c9184a 20%, #ff8fa3 60%, #ffe5ec 100%);
+    border-radius: 40% 60% 55% 45% / 50% 50% 50% 50%;
+    margin-top: -95px; margin-left: -35px;
+    transform-origin: center bottom;
+    box-shadow: inset 0 -10px 15px rgba(89,13,34,0.3), 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.4);
+    opacity: 0; transform: scale(0) translateY(10px);
+}
+
+/* Animasi Mekar */
+.page.active .a-flower .a-petal { opacity: 0.95; transition: all 2.5s cubic-bezier(0.25, 1, 0.3, 1) var(--delay); }
+.page.active .a-flower .a-petal:nth-child(1) { transform: rotate(0deg) scale(1) translateY(0); }
+.page.active .a-flower .a-petal:nth-child(2) { transform: rotate(72deg) scale(1) translateY(0); }
+.page.active .a-flower .a-petal:nth-child(3) { transform: rotate(144deg) scale(1) translateY(0); }
+.page.active .a-flower .a-petal:nth-child(4) { transform: rotate(216deg) scale(1) translateY(0); }
+.page.active .a-flower .a-petal:nth-child(5) { transform: rotate(288deg) scale(1) translateY(0); }
+
+/* Benang Sari */
+.a-stamens { position: absolute; top: 0; left: 0; z-index: 15; }
+.a-stamen {
+    position: absolute; bottom: 0; left: -1px;
+    width: 1.5px; height: 0px; background: #ff4d6d;
+    transform-origin: bottom center;
+}
+.a-stamen::after {
+    content: ''; position: absolute; top: -4px; left: -2.5px;
+    width: 6px; height: 6px; background: #590d22; border-radius: 50%; opacity: 0;
+}
+
+.a-stamen:nth-child(1) { transform: rotate(25deg); }
+.a-stamen:nth-child(2) { transform: rotate(70deg); }
+.a-stamen:nth-child(3) { transform: rotate(115deg); }
+.a-stamen:nth-child(4) { transform: rotate(160deg); }
+.a-stamen:nth-child(5) { transform: rotate(205deg); }
+.a-stamen:nth-child(6) { transform: rotate(250deg); }
+.a-stamen:nth-child(7) { transform: rotate(295deg); }
+.a-stamen:nth-child(8) { transform: rotate(340deg); }
+
+.page.active .a-flower .a-stamen { height: 35px; transition: height 1.5s ease calc(var(--delay) + 1.5s); }
+.page.active .a-flower .a-stamen::after { opacity: 1; transition: opacity 0.5s ease calc(var(--delay) + 2s); }
+
+.a-core {
+    position: absolute; top: -8px; left: -8px; width: 16px; height: 16px;
+    background: radial-gradient(circle, #ffb3c6, #c9184a); border-radius: 50%;
+    opacity: 0; transform: scale(0);
+}
+.page.active .a-flower .a-core { opacity: 1; transform: scale(1); transition: all 1s ease calc(var(--delay) + 1s); }
+
+/* ================================================= */
+/* CSS MINI GAME (MEMORY MATCH) FIXED 3D             */
+/* ================================================= */
+.game-board { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px; 
+    margin-top: 15px; 
+    margin-bottom: 25px; /* Tambahan biar tombol KEMBALI turun dikit */
+    max-width: 400px; 
+    width: 100%; 
+    margin-left: auto;
+    margin-right: auto;
+    perspective: 1000px;
+}
+
+.card { 
+    position: relative; 
+    /* height: 75px; <--- HAPUS BARIS INI */
+    aspect-ratio: 1 / 1; /* TAMBAH INI: Biar kartunya selalu kotak sempurna */
+    cursor: pointer; 
+    transform-style: preserve-3d; 
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); 
+}
+
+.card.flipped { 
+    transform: rotateY(180deg); 
+}
+
+.card .front, .card .back { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    backface-visibility: hidden; 
+    -webkit-backface-visibility: hidden;
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+}
+
+.card .front { 
+    background: #fb6f92; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .front::after { 
+    content: '🌸'; 
+    font-size: 1.5rem; 
+}
+
+.card .back { 
+    background: #ffffff; 
+    transform: rotateY(180deg); 
+    overflow: hidden;
+}
+
+.card .back img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    object-position: center; /* Tambah ini biar fokus fotonya pas di tengah wajah */
+    display: block; 
+}
+
+/* --- CSS VIDEO FULL CINEMATIC --- */
+.video-wrapper {
+    margin: 15px 0; width: 100%; max-width: 320px;
+    background: var(--glass-bg); backdrop-filter: blur(15px);
+    border-radius: 15px; border: 1px solid var(--glass-border);
+    padding: 8px; box-shadow: 0 15px 35px rgba(201, 24, 74, 0.25);
+    transition: transform 0.3s ease;
+}
+
+.video-wrapper:hover { transform: scale(1.02); }
+
+.video-wrapper video {
+    width: 100%; aspect-ratio: 9/16; object-fit: cover;
+    border-radius: 10px; display: block;
+    background-color: #000;
+}
+
+/* ================================================= */
+/* CSS GALERI SLIDER POLAROID (HALAMAN 6)            */
+/* ================================================= */
+.slider-container {
+    width: 100%;
+    max-width: 400px; 
+    margin: 10px auto 20px auto;
+    overflow: hidden; 
+}
+
+.slider-wrapper {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 15px 10px 30px 10px;
+    scroll-behavior: smooth;
+    /* Menyembunyikan scrollbar jelek bawaan browser */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.slider-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.slide-card {
+    flex: 0 0 85%; /* Sengaja 85% biar foto sebelahnya 'ngintip' sedikit */
+    scroll-snap-align: center;
+    background: #ffffff; /* Background putih khas Polaroid */
+    padding: 15px 15px 25px 15px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: rotate(-2deg); /* Dimiringin dikit biar natural */
+    transition: transform 0.3s ease;
+}
+
+/* Biar miringnya selang-seling (kiri-kanan) */
+.slide-card:nth-child(even) {
+    transform: rotate(3deg); 
+}
+
+.slide-card:hover {
+    transform: scale(1.05) rotate(0deg);
+    z-index: 5;
+}
+
+.slide-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Bikin fotonya selalu kotak (square) */
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.slide-text {
+    font-family: 'Dancing Script', cursive; /* Pake font latin biar makin estetik */
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 15px;
+    margin-bottom: 0;
+    line-height: 1.2;
+    text-shadow: none; /* Hilangin bayangan biar teksnya clean */
+}
+
+/* ================================================= */
+/* TOMBOL MUSIK KANAN ATAS                           */
+/* ================================================= */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 999; /* Penting! Biar selalu di atas dan nggak ketutupan halaman lain */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(201, 24, 74, 0.2);
+    transition: all 0.3s ease;
+    padding: 0; 
+}
+
+.music-btn:hover {
+    transform: scale(1.15) rotate(15deg); /* Efek membesar & miring dikit pas disentuh */
+    background: rgba(255, 255, 255, 0.8);
+}
