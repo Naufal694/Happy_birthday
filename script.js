@@ -168,9 +168,9 @@ function toggleMusic() {
     const musicBtn = document.getElementById('musicToggle');
     if (bgAudio.paused) {
         bgAudio.play();
-        musicBtn.innerHTML = '🎵'; // Ganti ikon nyala
+        musicBtn.innerHTML = '🎵';
     } else {
         bgAudio.pause();
-        musicBtn.innerHTML = '🔇'; // Ganti ikon mati
+        musicBtn.innerHTML = '🔇'; 
     }
 }
