@@ -32,8 +32,15 @@ body {
 
 /* Latar Belakang Animasi Gelembung Full Screen */
 .circles {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0; pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none
 }
+
 .circles li {
     position: absolute; display: block; list-style: none; width: 20px; height: 20px;
     background: rgba(255, 255, 255, 0.4); animation: animate 25s linear infinite; bottom: -150px;
@@ -76,13 +83,14 @@ body {
 
 /* --- LAYOUT HALAMAN FULL SCREEN --- */
 .page {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+   .page {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
-    opacity: 0; visibility: hidden;
-    transform: scale(0.9) translateY(20px);
-    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 10; padding: 20px; text-align: center;
+    opacity: 0; visibility: hidden; transform: scale(0.9) translateY(20px);
+    transition: all 0.6s ease; z-index: 10; padding: 20px; text-align: center;
+    overflow-y: auto; 
+    -webkit-overflow-scrolling: touch; /* 👈 TAMBAH INI: Pelumas scroll HP */
+}
 }
 
 .page.active { 
@@ -406,4 +414,18 @@ button:hover {
 .music-btn:hover {
     transform: scale(1.15) rotate(15deg); /* Efek membesar & miring dikit pas disentuh */
     background: rgba(255, 255, 255, 0.8);
+}
+
+
+/* RESPONSIVE LAYAR HP (BIAR BISA DI-SCROLL)         */
+@media (max-width: 768px) { 
+    .page { 
+        justify-content: flex-start; /* Tarik konten ke atas biar bisa turun & di-scroll */
+        padding-top: 50px; 
+        padding-bottom: 50px; /* Kasih ruang di bawah biar scroll-nya nggak mentok */
+    }
+    .icon-bounce { font-size: 3.5rem; }
+    h1 { font-size: 3rem; }
+    .big-title { font-size: 4rem; }
+    .medium-title { font-size: 2.5rem; }
 }
