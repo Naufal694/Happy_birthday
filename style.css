@@ -420,6 +420,7 @@ button:hover {
     }
     .icon-bounce { font-size: 3.5rem; }
     h1 { font-size: 3rem; }
-    .big-title { font-size: 4rem; }
+    .big-title { font-size: 3.5rem; }
     .medium-title { font-size: 2.5rem; }
+    .typing-area{font-size: 1.1rem;}
 }
